@@ -11,7 +11,7 @@
 		android:ems="20"
 		android:textSize="24.0px"
 		android:textAppearance="?android:attr/textAppearanceLarge" />
-	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	<LinearLayout 
 		android:orientation="vertical"
 		android:layout_width="fill_parent"
 		android:layout_height="fill_parent"
@@ -28,6 +28,14 @@
 			android:layout_gravity="center_horizontal|center_vertical"
 			android:gravity="center_horizontal|center_vertical"
 			android:text="@string/openFile"/>
+
+		<TextView
+		    android:id="@+id/textView1"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:text="GROUP_S"
+		    android:textAppearance="?android:attr/textAppearanceLarge" />
+
 		<TextView android:id="@+id/warranty"  
 			android:layout_width="fill_parent" 
 			android:layout_height="fill_parent"
