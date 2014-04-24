@@ -31,18 +31,40 @@ public class FontSizePreference extends DialogPreference
 				
 		// figure out the current size. 
 		SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getContext());
-		String font = sharedPref.getString("fontsize", "Medium");
+		String font = sharedPref.getString("fontsize", "1");
 		
-		if (font.equals("Extra Small"))
+		if (font.equals("8"))
 			selected = 0;
-		else if (font.equals("Small"))
+		else if (font.equals("9"))
 			selected = 1;
-		else if (font.equals("Medium"))
+		else if (font.equals("10"))
 			selected = 2;
-		else if (font.equals("Large"))
+		else if (font.equals("11"))
 			selected = 3;
-		else if (font.equals("Huge"))
+		else if (font.equals("12"))
 			selected = 4;
+		else if (font.equals("14"))
+			selected = 5;
+		else if (font.equals("16"))
+				selected = 6;
+		else if (font.equals("18"))
+				selected = 7;
+		else if (font.equals("20"))
+				selected = 8;
+		else if (font.equals("22"))
+				selected = 9;
+		else if (font.equals("24"))
+				selected =10;
+		else if (font.equals("26"))
+				selected = 11;
+		else if (font.equals("28"))
+				selected = 12;
+		else if (font.equals("36"))
+			selected = 13;
+		else if (font.equals("48"))
+			selected = 14;
+		else if (font.equals("72"))
+			selected = 15;
 	}
 	
 	@Override
@@ -56,15 +78,38 @@ public class FontSizePreference extends DialogPreference
 				Editor editor = PreferenceManager.getDefaultSharedPreferences(getContext()).edit();		
 				
 				if (selected == 0)
-					editor.putString("fontsize", "Extra Small");
+					editor.putString("fontsize", "8");
 				else if (selected == 1)
-					editor.putString("fontsize", "Small");
+					editor.putString("fontsize", "9");
 				else if (selected == 2)
-					editor.putString("fontsize", "Medium");
+					editor.putString("fontsize", "10");
 				else if (selected == 3)
-					editor.putString("fontsize", "Large");
+					editor.putString("fontsize", "11");
 				else if (selected == 4)
-					editor.putString("fontsize", "Huge");
+					editor.putString("fontsize", "12");
+				else if (selected == 5)
+					editor.putString("fontsize", "14");
+				else if (selected == 6)
+					editor.putString("fontsize", "16");
+				else if (selected == 7)
+					editor.putString("fontsize", "18");
+				else if (selected == 8)
+					editor.putString("fontsize", "20");
+				else if (selected == 9)
+					editor.putString("fontsize", "22");
+				else if (selected == 10)
+					editor.putString("fontsize", "24");
+				else if (selected == 11)
+					editor.putString("fontsize", "26");
+				else if (selected == 12)
+					editor.putString("fontsize", "28");
+				else if (selected == 13)
+					editor.putString("fontsize", "36");
+				else if (selected == 14)
+					editor.putString("fontsize", "48");
+				else if (selected == 15)
+					editor.putString("fontsize", "72");
+				
 				
 				editor.commit();
 				
@@ -74,7 +119,7 @@ public class FontSizePreference extends DialogPreference
 		builder.setNegativeButton("Cancel", null);
 	
 		// load the font names and create the adapter
-		String[] arrayOfFonts = {"Extra Small", "Small", "Medium", "Large", "Huge"};
+		String[] arrayOfFonts = {"8","9","10","11","12","14","16","18","20","22","24","26","28","36","48","72"};
         fonts = Arrays.asList(arrayOfFonts);
 
 		FontTypeArrayAdapter adapter = new FontTypeArrayAdapter(getContext(), android.R.layout.simple_list_item_single_choice, fonts);
@@ -109,17 +154,40 @@ public class FontSizePreference extends DialogPreference
 		
 				
 			final String option = tv.getText().toString();			
-			if (option.equals("Extra Small"))
-				tv.setTextSize(12.0f);
-			else if (option.equals("Small"))
+			if (option.equals("8"))
 				tv.setTextSize(16.0f);
-			else if (option.equals("Medium"))
-				tv.setTextSize(20.0f);
-			else if (option.equals("Large"))
-				tv.setTextSize(24.0f);
-			else if (option.equals("Huge"))
-				tv.setTextSize(28.0f);
-		
+			else if (option.equals("9"))
+				tv.setTextSize(16.0f);
+			else if (option.equals("10"))
+				tv.setTextSize(16.0f);
+			else if (option.equals("11"))
+				tv.setTextSize(16.0f);
+			else if (option.equals("12"))
+				tv.setTextSize(16.0f);
+			else if (option.equals("14"))
+				tv.setTextSize(16.0f);
+			else if (option.equals("16"))
+					tv.setTextSize(16.0f);
+			else if (option.equals("18"))
+				tv.setTextSize(16.0f);
+			else if (option.equals("20"))
+				tv.setTextSize(16.0f);
+			else if (option.equals("22"))
+				tv.setTextSize(16.0f);
+			else if (option.equals("24"))
+				tv.setTextSize(16.0f);
+			else if (option.equals("26"))
+				tv.setTextSize(16.0f);
+			else if (option.equals("28"))
+				tv.setTextSize(16.0f);
+			else if (option.equals("36"))
+				tv.setTextSize(16.0f);
+			else if (option.equals("48"))
+				tv.setTextSize(16.0f);
+			else if (option.equals("72"))
+				tv.setTextSize(16.0f);
+			
+			
 			// general options
 			tv.setTextColor(Color.BLACK);
 			tv.setPadding(10, 3, 3, 3);
