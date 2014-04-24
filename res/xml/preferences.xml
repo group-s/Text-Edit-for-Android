@@ -60,6 +60,12 @@
 			android:summary="Choose a font size"  
 			android:defaultValue="Medium"
 			android:dialogTitle="Choose a font size" />
+		<org.paulmach.textedit.FontStylePreference
+			android:key="fontstyle"  
+			android:title="Font Style"
+			android:summary="Choose a font style"  
+			android:defaultValue="normal"
+			android:dialogTitle="Choose a font style " />
 		<org.paulmach.textedit.ColorPreference
 			android:key="fontcolor"  
 			android:title="Font Color"
