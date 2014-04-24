@@ -1,13 +1,21 @@
 package org.paulmach.textedit;
 
+import java.io.BufferedReader;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfWriter;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -20,6 +28,7 @@ import android.content.DialogInterface.OnCancelListener;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.ParcelFileDescriptor;
 import android.preference.PreferenceManager;
 import android.provider.SearchRecentSuggestions;
@@ -65,7 +74,7 @@ public class pmTextEdit extends Activity
 	private final static int DIALOG_NOTFOUND_ERROR = 9;
 	private final static int DIALOG_SHOULD_SAVE_INTENT = 13;
 	private final static int DIALOG_MODIFIED = 14;
-	
+	private final static int DIALOG_SAVEAS_PDF=15;
 	private final static int DIALOG_SAVE_FILE_AUTOCOMPLETE = 10;
 	private final static int DIALOG_OPEN_FILE_AUTOCOMPLETE = 11;
 
@@ -486,6 +495,45 @@ public class pmTextEdit extends Activity
 	/****************************************************************
 	 * saveNote()
 	 * 		What to do when saving note */
+	public void savePDF(CharSequence fname)
+	{
+		
+		System.out.println("fname:"+fname);
+		
+		String internalStoragePath=Environment.getExternalStorageDirectory().getAbsolutePath();
+		File inputFile=new File(fname.toString());
+		String pdfFilePath=fname.toString()+".pdf";
+		File outputFile=new File(pdfFilePath);
+		
+		try {
+			outputFile.createNewFile();
+			FileOutputStream fos=new FileOutputStream(outputFile);
+			Document document=new Document();
+			PdfWriter.getInstance(document, fos);
+			BufferedReader br=new BufferedReader(new FileReader(inputFile));
+			String line;
+			document.open();
+			while((line=br.readLine())!=null)
+			{
+				
+				document.add(new Paragraph(line));
+			}
+			
+			document.close();
+			br.close();
+			inputFile.delete();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (DocumentException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 	public void saveNote(CharSequence fname)
 	{
 		errorSaving = false;
@@ -897,6 +945,7 @@ public class pmTextEdit extends Activity
 			// need to have an intuitive starting option for save and open
 			case DIALOG_SAVE_FILE_AUTOCOMPLETE:
 			case DIALOG_SAVE_FILE:
+			case DIALOG_SAVEAS_PDF:	
 				
 				if (backFromFileBrowser) {
 					saveDialog_fne.setText(fileBrowserReturnFile);
@@ -1006,7 +1055,9 @@ public class pmTextEdit extends Activity
 	{
 		switch (id) {
 			case DIALOG_SAVE_FILE_AUTOCOMPLETE:
-			case DIALOG_SAVE_FILE: {
+			case DIALOG_SAVE_FILE:
+			case DIALOG_SAVEAS_PDF:
+			{
 				int layoutid;
 				if (autoComplete)
 					layoutid = R.layout.dialog_savefile;
@@ -1066,7 +1117,7 @@ public class pmTextEdit extends Activity
 							} else {
 								// this will handle some of the other errors.
 								saveNote(v.getText());
-	
+								savePDF(v.getText());
 								savingFile = false;
 								
 								if (!errorSaving && openingRecent)
@@ -1550,10 +1601,12 @@ public class pmTextEdit extends Activity
 			case MENU_SAVEAS_ID: // Save as
 				savingFile = true;
 				
-				if (autoComplete)
+				showDialog(DIALOG_SAVEAS_PDF);
+				
+		/*		if (autoComplete)
 					showDialog(DIALOG_SAVE_FILE_AUTOCOMPLETE);
 				else
-					showDialog(DIALOG_SAVE_FILE);
+					showDialog(DIALOG_SAVE_FILE);*/
 				break;
 				
 			case MENU_OPENRECENT_ID: // Open Recent List
