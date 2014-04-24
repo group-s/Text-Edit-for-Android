@@ -730,6 +730,19 @@ public class pmTextEdit extends Activity
 		else if (fontsize.equals("72"))
 			text.setTextSize(72.0f);
 			
+			
+		
+		
+		String fontStyle=sharedPref.getString("fontstyle", "normal");
+		if(fontStyle.equals("normal"))
+			text.setTypeface(null, Typeface.NORMAL);
+		else if(fontStyle.equals("bold"))
+			text.setTypeface(null, Typeface.BOLD);
+		else if(fontStyle.equals("italic"))
+			text.setTypeface(null, Typeface.ITALIC);
+		else if(fontStyle.equals("bold_italic"))
+			text.setTypeface(null, Typeface.BOLD_ITALIC);
+		
 		/********************************
 		 * Colors */
 		int bgcolor = sharedPref.getInt("bgcolor", 0xFF000000);
