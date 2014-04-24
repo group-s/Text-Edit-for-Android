@@ -694,21 +694,42 @@ public class pmTextEdit extends Activity
 
 		/********************************
 		 * font size */
-		String fontsize = sharedPref.getString("fontsize", "Medium");
+		String fontsize = sharedPref.getString("fontsize", "14");
+	
 		
-		if (fontsize.equals("Extra Small"))
+		if (fontsize.equals("8"))
+			text.setTextSize(8.0f);
+		else if (fontsize.equals("9"))
+			text.setTextSize(9.0f);
+		else if (fontsize.equals("10"))
+			text.setTextSize(10.0f);
+		else if (fontsize.equals("11"))
+			text.setTextSize(11.0f);
+		else if (fontsize.equals("12"))
 			text.setTextSize(12.0f);
-		else if (fontsize.equals("Small"))
+		else if (fontsize.equals("14"))
+			text.setTextSize(14.0f);
+		else if (fontsize.equals("16"))
 			text.setTextSize(16.0f);
-		else if (fontsize.equals("Medium"))
+		else if (fontsize.equals("18"))
+			text.setTextSize(18.0f);
+		else if (fontsize.equals("20"))
 			text.setTextSize(20.0f);
-		else if (fontsize.equals("Large"))
+		else if (fontsize.equals("22"))
+			text.setTextSize(22.0f);
+		else if (fontsize.equals("24"))
 			text.setTextSize(24.0f);
-		else if (fontsize.equals("Huge"))
+		else if (fontsize.equals("26"))
+			text.setTextSize(26.0f);
+		else if (fontsize.equals("28"))
 			text.setTextSize(28.0f);
-		else
-			text.setTextSize(20.0f);
-		
+		else if (fontsize.equals("36"))
+			text.setTextSize(36.0f);
+		else if (fontsize.equals("48"))
+			text.setTextSize(48.0f);
+		else if (fontsize.equals("72"))
+			text.setTextSize(72.0f);
+			
 		/********************************
 		 * Colors */
 		int bgcolor = sharedPref.getInt("bgcolor", 0xFF000000);
